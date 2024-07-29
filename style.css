@@ -94,7 +94,7 @@ nav ul li a:hover::after{
 }
 
 .about-col-1 img{
-    width: 70%;
+    width: 100%;
     border-radius: 15px;
 }
 
@@ -107,4 +107,18 @@ nav ul li a:hover::after{
     font-size: 40px;
     font-weight: 600;
     color: #fff;
+}
+
+.tab-titles{
+    display: flex;
+    margin: 20px 0 40px;
+
+}
+
+.tab-links{
+    margin-right: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
 }
