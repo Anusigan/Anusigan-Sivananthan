@@ -23,7 +23,7 @@
                 </nav>
                 <div class="header-text">
                     <p>Computer Science Undergraduate</p>
-                    <h1>Hi!, I'm <span>Anusigan Sivananthan</span>,<br>BSc(hons) Computer Science Undergraduate from University of Westminster</h1>
+                    <h1>Hi!, I'm <span>Anusigan Sivananthan</span>,<br>BSc (Hons) Computer Science<br>University of Westminster</h1>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                         <img src="images\anu_about.jpg" alt="image">
                     </div>
                     <div class="about-col-2">
-                        <h1 class="sub-title">About Me</h1>
+                        <h1 class="sub-title">About Me</h1><br>
                         <p>I am a Bsc (Hons) Computer Science undergraduate of Informatics Institute of Technology
                             affiliated by the University of Westminster.
                             I believe in the power of collaboration and continuous learning. 
@@ -44,16 +44,109 @@
                             I seek to absorb insights and perspectives that 
                             enrich my understanding of the tech industry.
                         </p>
-                    </div>
+                    
 
                         <div class="tab-titles">
-                            <p class="tab-links">Skills</p>
-                            <p class="tab-links">Experience</p>
-                            <p class="tab-links">Education</p>
+                            <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                            <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                            <p class="tab-links" onclick="opentab('education')">Education</p>
                         </div>
+
+                        <div class="tab-contents active-tab" id="skills">
+                            <ul>
+                                <li><span>Web Development</span><br>I specialize in developing interactive and responsive front-end websites using 
+                                    HTML, CSS, and JavaScript ensuring a seamless user experience.
+                                </li>
+                                <li><span>Software Development</span><br>I specialize in developing robust software applications using Java and Python,
+                                    leveraging my expertise to create efficient and scalable solutions.
+                                </li>
+                                <li><span>UI/UX Designing</span><br>I specialize in UI/UX design using Figma, 
+                                    creating intuitive and visually appealing user interfaces that enhance user experience.
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <div class="tab-contents" id="experience">
+                            <ul>
+                                <li><span>May 2024-Present</span><br>Blogger at Medium </li>
+
+                            </ul>
+                        </div>
+
+                        <div class="tab-contents" id="education">
+                            <ul>
+                                <li><span>2009-2022</span><br>Primary & Secondary Education <br>Hindu College Colombo </li>
+                                <li><span>2023-2024</span><br>Computing Foundation <br>Informatics Institute of Technology </li>
+                                <li><span>2024-2027</span><br>BSc (Hons) Computer Science <br>University of Westminster </li>
+
+
+
+                            </ul>
+                        </div>
+
+                    </div>
 
                 </div>
             </div>
         </div>
+
+    <!-- ---------services--------- -->
+    <div id="services">
+        <div class="container">
+            <h1 class="sub-title">My Services</h1>
+            <div class="services-list">
+                <div>
+                    <h2>Software Development</h2>
+                    <p> I offer expert services in developing robust and scalable software programs using Java and Python, 
+                        tailored to meet your specific needs and requirements.</p>
+                    <a href="#">Learn more</a>
+                </div>
+
+                <div>
+                    <h2>Web Designing</h2>
+                    <p>  I provide professional services in designing and developing interactive, responsive websites 
+                        using HTML, CSS, and JavaScript.</p>
+                    <a href="#">Learn more</a>
+                </div>
+
+                <div>
+                    <h2>UI/UX Designing</h2>
+                    <p> I offer specialized services in UI/UX design using Figma, 
+                        creating intuitive and visually appealing user interfaces to enhance overall user experience.</p>
+                    <a href="#">Learn more</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+        <script>
+            var tablinks=document.getElementsByClassName("tab-links");
+            var tabcontents=document.getElementsByClassName("tab-contents");
+
+            function opentab(tabname){
+                for(tablink of tablinks){
+                    tablink.classList.remove("active-link");
+                }
+
+                for(tabcontent of tabcontents){
+                    tabcontent.classList.remove("active-tab");
+                }
+
+                event.currentTarget.classList.add("active-link");
+                document.getElementById(tabname).classList.add("active-tab");
+
+            }
+        </script>
     </body>
 </html>
