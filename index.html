@@ -14,13 +14,15 @@
             <div class="container">
                 <nav>
                     <img src=""  class="logo">
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="#">Contact</a></li>
+                    <ul id="sidemenu">
+                        <li><a href="#header">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Projects</a></li>
+                        <li><a href="#portfolio">Certifications</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
                     </ul>
+                    <i class="fa-solid fa-bars" onclick="openmenu()"></i>
                 </nav>
                 <div class="header-text">
                     <p>Computer Science Undergraduate</p>
@@ -35,6 +37,7 @@
                 <div class="row">
                     <div class="about-col-1">
                         <img src="images\anu_about.jpg" alt="image">
+                        <a href="images/Anusigan Sivananthan Curriculam Vitae.pdf"  class="btn btn2" download>Download Curriculum Vitae</a>
                     </div>
                     <div class="about-col-2">
                         <h1 class="sub-title">About Me</h1><br>
@@ -225,60 +228,72 @@
                 </div>
 
                 <div class="work">
+                    <div class="additional-certifications">
                     <img src="images\cert7.png">
                     <div class="layer">
                         <h3>Microsoft imagine cup 2024</h3>
                         <p>IEEE Computer Society of IIT<br>Issued Jan 2024</p>
                         <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
+                    </div>
                 </div>
 
                 <div class="work">
+                    <div class="additional-certifications">
                     <img src="images\cert8.png">
                     <div class="layer">
                         <h3>GIT 101</h3>
                         <p>Mozilla Campus Club of IIT<br>Issued Dec 2023</p>
                         <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
+                    </div>
                 </div>
 
                 <div class="work">
+                    <div class="additional-certifications">
                     <img src="images\cert9.png">
                     <div class="layer">
                         <h3>IEEE Xtreme 17.0</h3>
                         <p>IEEE Xtreme<br>Issued Oct 2023</p>
                         <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
+                    </div>
                 </div>
 
                 <div class="work">
+                    <div class="additional-certifications">
                     <img src="images\cert10.png">
                     <div class="layer">
                         <h3>Introduction to Microsoft Excel</h3>
                         <p>Coursera<br>Issued Oct 2023</p>
                         <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
-                </div>
-
-                <div class="work">
-                    <img src="images\cert11.png">
-                    <div class="layer">
-                        <h3>Develop Generative A</h3>
-                        <p>Microsoft Learning 365 <br>Issued Jun 2024</p>
-                        <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
                 </div>
 
                 <div class="work">
+                    <div class="additional-certifications">
+                    <img src="images\cert11.png">
+                    <div class="layer">
+                        <h3>Python Basics</h3>
+                        <p>Microsoft Learning 365 <br>Issued Jun 2024</p>
+                        <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="work">
+                    <div  class="additional-certifications">
                     <img src="images\cert12.png">
                     <div class="layer">
                         <h3>Develop Generative AI solutions with Azure OpenAI Service Trophy</h3>
                         <p>Microsoft Learning 365 <br>Issued Jun 2024</p>
                         <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
+                    </div>
                 </div>
             </div>
-            <a href="#" class="btn">See more</a>
+            <a href="#" class="btn" id="see-more-btn">See more</a>
         </div>
 
      </div>
@@ -289,8 +304,8 @@
             <div class="row">
                 <div class="contact-left">
                     <h1 class="sub-title">Contact Me</h1>
-                    <p>sivananthananusigan@gmail.com</p>
-                    <p>0775810310</p>
+                    <p><i class="fa-solid fa-envelope"></i>sivananthananusigan@gmail.com</p>
+                    <p><i class="fa-solid fa-phone"></i>0775810310</p>
                     <div class="social-icons">
                         <a href=""><i class="fa-brands fa-square-instagram"></i></a>
                         <a href=""><i class="fa-brands fa-facebook"></i></a>
@@ -298,18 +313,26 @@
                         <a href=""><i class="fa-brands fa-linkedin"></i></a>
                         <a href=""><i class="fa-brands fa-square-github"></i></a>
                     </div>
+            
                 </div>
                 <div class="contact-right">
-                    <form>
+                    <form name="submit-to-google-sheet">
                         <input type="text" name="Name" placeholder="Enter your name" required>
                         <input type="email" name="Email" placeholder="Enter your Email" required>
-                        
+                        <textarea name="Message" rows="6" placeholder="Your message" ></textarea>
+                        <button type="submit" class="btn btn2">Submit</button>
+
                     </form>
+                    <span id="msg"></span>
                 </div>
             </div>
         </div>
-
      </div>
+     <div class="copyright">
+        <p>© 2024 Anusigan Sivananthan. All rights reserved.</p>
+     </div>
+     </div>
+
 
 
 
@@ -337,6 +360,47 @@
                 document.getElementById(tabname).classList.add("active-tab");
 
             }
+        </script>
+
+        <script>
+            var sidemenu=document.getElementById("sidemenu");
+            function openmenu(){
+                sidemenu.style.right="0";
+            }
+
+            function closemenu(){
+                sidemenu.style.right="-200px";
+            }
+        </script>
+
+        <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbx6PMZOeyMZkKrIa5dJ4r73QHVmWuMgahzWBVYNc9uIAtd5C6l2VIY3XOqTr9UrSXNDJA/exec'
+            const form = document.forms['submit-to-google-sheet']
+            const msg=document.getElementById("msg")
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response =>{
+                    msg.innerHTML="Message sent successfully!"
+                    setTimeout(function(){
+                        msg.innerHTML=""
+                    },5000)
+                    form.reset()
+                
+                })
+                .catch(error => console.error('Error!', error.message))
+            })
+          </script>
+          <script>
+            document.getElementById('see-more-btn').addEventListener('click', function(event) {
+                event.preventDefault();
+                var additionalCertifications = document.querySelectorAll('.additional-certifications');
+                additionalCertifications.forEach(function(cert) {
+                    cert.style.display = 'block';
+                });
+                this.style.display = 'none'; // Hide the "See more" button after clicking
+            });
         </script>
     </body>
 </html>
