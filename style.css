@@ -468,3 +468,46 @@ nav ul .fa-solid{
 .additional-certifications{
     display: none;
 }
+
+
+
+/* Keyframes for sliding in animations */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Initial state for sections */
+.section {
+    opacity: 0;
+    transform: translateX(-100%); /* Start from the left */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Modify this if you want the sections to slide in from different sides */
+.section.right {
+    transform: translateX(100%); /* Start from the right */
+}
+
+/* Active class to trigger the animation */
+.section.active {
+    opacity: 1;
+    transform: translateX(0);
+}

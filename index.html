@@ -235,7 +235,7 @@
                         <p>IEEE Computer Society of IIT<br>Issued Jan 2024</p>
                         <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
-                    </div>
+                </div>
                 </div>
 
                 <div class="work">
@@ -392,15 +392,6 @@
                 .catch(error => console.error('Error!', error.message))
             })
           </script>
-          <script>
-            document.getElementById('see-more-btn').addEventListener('click', function(event) {
-                event.preventDefault();
-                var additionalCertifications = document.querySelectorAll('.additional-certifications');
-                additionalCertifications.forEach(function(cert) {
-                    cert.style.display = 'block';
-                });
-                this.style.display = 'none'; // Hide the "See more" button after clicking
-            });
-        </script>
+         
     </body>
 </html>
