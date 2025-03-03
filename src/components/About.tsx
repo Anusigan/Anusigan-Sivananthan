@@ -114,9 +114,9 @@ const About = () => {
               className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed text-lg" 
               variants={itemVariants}
             >
-              I'm a passionate computer science student with a focus on software development and artificial intelligence. 
-              Currently pursuing my Bachelor's degree at University of Technology, I combine strong theoretical knowledge 
-              with practical experience through various projects and internships.
+              I'm a passionate computer science undergraduate with a focus on software engineering. 
+              Currently pursuing my Bachelor's degree at Informatics Institute of Technology Affiliated with University of Westminster, I combine strong theoretical knowledge 
+              with practical experience through various project.
             </motion.p>
             
             <motion.p 
