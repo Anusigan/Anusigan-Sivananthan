@@ -1,0 +1,115 @@
+{
+  "profile": {
+    "name": "Anusigan Sivananthan",
+    "role": "Trainee Software Engineer, IFS R&D International",
+    "eyebrow": "Computer Science Undergraduate — University of Westminster (via IIT)",
+    "location": "Wellawatte, Sri Lanka",
+    "status": "Active — open to consulting-track roles",
+    "lede": "I turn specifications into shipped software at IFS R&D International — then spend the rest of my time building the tools, platforms and interfaces that specification never quite covers.",
+    "summary": "Final-year Computer Science undergraduate, currently working as a Trainee Software Engineer at IFS R&D International. I've spent the last year resolving software defects and customer-reported issues inside a large enterprise codebase — PL/SQL, the IFS Aurena framework, agile sprints — which has taught me more about reading other people's specifications than any course did.",
+    "certified": "IFS Certified Practitioner — Development",
+    "interests": ["Machine learning", "System design", "Explainable AI", "Secure systems"],
+    "next": "Growing into a customer-facing IFS consulting role",
+    "languages": "English & Sinhala (fluent) · Tamil (native)",
+    "email": "sivananthan.20230297@iit.ac.lk",
+    "phone": "+94 77 581 0310",
+    "linkedin": "https://www.linkedin.com/in/anusigan-sivananthan-b3a0b1264",
+    "github": "https://github.com/Anusigan"
+  },
+  "experience": [
+    {
+      "period": "July 2025 → present",
+      "active": true,
+      "title": "Undergraduate Trainee Software Engineer",
+      "org": "IFS R&D International (Pvt) Ltd",
+      "bullets": [
+        "Deliver user stories within agile sprints, supporting feature development end to end.",
+        "Develop functional enhancements aligned with system requirements, and fix software defects across releases.",
+        "Handle customer-reported issues directly, working with developers, QA and product owners to land timely fixes.",
+        "Apply spec-driven development — translating written specifications into structured, maintainable implementations.",
+        "Contribute to LUMOS, building MCP tools for AI-assisted engineering, and apply agentic AI workflows to day-to-day development and problem-solving."
+      ],
+      "stack": ["PL/SQL", "IFS Aurena", "Bitbucket", "Jira"],
+      "footnote": "Training: IFS Academy — SQL, PL/SQL, Base Server development, testing & source control."
+    }
+  ],
+  "projects": [
+    {
+      "idx": "01",
+      "name": "MemoRaid",
+      "tagline": "Personalized memory-rehabilitation platform · SDGP",
+      "description": "A platform built to support amnesia rehabilitation, using structured recall exercises and progress tracking rather than one-size-fits-all games. I lead this as an ongoing student-directed group project.",
+      "stack": ["Flutter", "Dart", "Node.js", "Supabase", "React"]
+    },
+    {
+      "idx": "02",
+      "name": "Event Ticketing System",
+      "tagline": "Full-stack application",
+      "description": "A ticketing platform built around a producer–consumer model, so high-demand events can issue and reconcile tickets concurrently without overselling.",
+      "stack": ["React", "Spring Boot", "Java"]
+    },
+    {
+      "idx": "03",
+      "name": "MyAttenef",
+      "tagline": "University attendance management system",
+      "description": "Attendance for students and lecturers, verified with QR codes and geolocation so a scan only counts if you were actually in the room. Shipped with a CI/CD pipeline from early on.",
+      "stack": ["React.js", "Node.js", "Express.js", "PostgreSQL", "Supabase", "CI/CD", "Flutter"]
+    },
+    {
+      "idx": "04",
+      "name": "NLP Resume Skill-Gap Analyzer",
+      "tagline": "AI-driven resume & job-description matching",
+      "description": "Parses a resume against a job description, scores the skill overlap, and surfaces the specific gaps worth closing — built to be honest rather than flattering.",
+      "stack": ["Python", "spaCy", "NLP", "PDF processing", "Data viz"]
+    }
+  ],
+  "skills": [
+    { "group": "languages", "items": ["Python", "Java", "JavaScript", "SQL / PL·SQL", "PHP", "HTML & CSS"] },
+    { "group": "frameworks", "items": ["React", "Node.js", "Spring Boot", "Flutter", "IFS Aurena"] },
+    { "group": "tools", "items": ["Git & GitHub", "Jira", "Figma", "VS Code", "IntelliJ", "NetBeans"] },
+    { "group": "areas of interest", "items": ["Machine learning", "System design", "Cybersecurity & secure systems", "Explainable AI"] },
+    { "group": "working style", "items": ["Leadership", "Cross-team collaboration", "Adaptability", "Time management"] }
+  ],
+  "education": [
+    {
+      "date": "2024 → present",
+      "title": "BSc (Hons) Computer Science",
+      "org": "Informatics Institute of Technology, affiliated with the University of Westminster",
+      "meta": "Level 04 avg. 80.67% · Level 05 avg. 74.8%"
+    },
+    {
+      "date": "2023",
+      "title": "Foundation Certificate in Higher Education",
+      "org": "Informatics Institute of Technology — Distinction"
+    },
+    {
+      "date": "2009 → 2022",
+      "title": "Primary & secondary education",
+      "org": "Hindu College, Colombo — 9 A's, G.C.E. O/L"
+    }
+  ],
+  "achievements": [
+    { "year": "2026", "text": "Semi-finalist — Masterminds, IFS" },
+    { "year": "2025", "text": "Finalist — Traveltech 3.0, Acornic Ventures" },
+    { "year": "2024", "text": "Finalist — Haxmas, Ascentic & RACIIT" },
+    { "year": "2024", "text": "Third place — Haxpedition, IEEE Student Branch of IIT" },
+    { "year": "2023", "text": "IEEE Xtreme 17.0 — Rank 96 (country), Rank 4 (university)" }
+  ],
+  "certifications": [
+    "IFS Certified Practitioner — Development (IFS Cloud)",
+    "IFS Learning Achievement — Operational Report Development",
+    "IFS Learning Achievement — Lifecycle Experience",
+    "Generative AI solutions with Azure OpenAI — Microsoft",
+    "Postman Student Expert",
+    "Networking Foundations — LinkedIn",
+    "Azure DevOps with GitHub — Microsoft",
+    "Introduction to Python — University of Moratuwa"
+  ],
+  "leadership": [
+    "Media Director — IEEE on Campus, IIT",
+    "Team Recruitment Lead — Hult Prize On Campus",
+    "Project Lead — MemoRaid (SDGP)",
+    "Member — IEEE & IEEE Computer Society, IIT",
+    "Member — Rotaract Club of IIT"
+  ]
+}
