@@ -25,7 +25,11 @@ export default function Contact() {
         setStatus('error')
       }
     } catch {
-      setStatus('error')
+      // No backend on GitHub Pages — open mailto as fallback
+      window.location.href = `mailto:sivananthan.20230297@iit.ac.lk?subject=Message from ${form.name}&body=${encodeURIComponent(form.message)}`
+      setStatus('success')
+      setForm({ name: '', email: '', message: '' })
+      setTimeout(() => setStatus('idle'), 4000)
     }
   }
 
