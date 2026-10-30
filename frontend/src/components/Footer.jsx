@@ -1,49 +1,37 @@
-import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail, Heart } from 'lucide-react'
+import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { Github, Linkedin, Mail } from 'lucide-react'
+import { PROFILE } from '../data'
+import { unlock } from '../secrets'
+import { scrollToId } from '../smoothScroll'
 
 export default function Footer() {
+  const [ref, inView] = useInView({ threshold: 0.6 })
+  useEffect(() => { if (inView) unlock('bottom') }, [inView])
+
   return (
-    <footer style={{
-      borderTop: '1px solid var(--border)',
-      padding: '40px 0',
-      background: 'var(--bg-primary)'
-    }}>
-      <div className="container" style={{
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px'
-      }}>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: '1rem', fontWeight: 700,
-            background: 'linear-gradient(90deg, #a78bfa, #38bdf8)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
-          }}
-        >
-          &lt;Anusigan /&gt;
-        </motion.p>
-
-        <div style={{ display: 'flex', gap: '16px' }}>
-          {[
-            { icon: Github, href: 'https://github.com/Anusigan' },
-            { icon: Linkedin, href: 'https://linkedin.com/in/Anusigan-Sivananthan' },
-            { icon: Mail, href: 'mailto:sivananthan.20230297@iit.ac.lk' },
-          ].map(({ icon: Icon, href }, i) => (
-            <motion.a
-              key={i} href={href} target="_blank" rel="noopener noreferrer"
-              whileHover={{ y: -2, color: '#a78bfa' }}
-              style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }}
-            >
-              <Icon size={18} />
-            </motion.a>
-          ))}
+    <footer ref={ref} className="footer">
+      <div className="container footer-inner">
+        <div>
+          <p className="footer-big">thanks for playing<span className="accent">.</span></p>
+          <p className="pixel-label" style={{ color: 'var(--text-3)', marginTop: 10 }}>
+            hand-built with react, canvas and a lot of fillRect() · {PROFILE.name} © {new Date().getFullYear()}
+          </p>
         </div>
-
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-          Built with <Heart size={12} color="#ec4899" fill="#ec4899" /> by Anusigan Sivananthan · {new Date().getFullYear()}
-        </p>
+        <div className="footer-actions">
+          <button className="btn-pixel btn-pixel--ghost" onClick={() => scrollToId('hero')}>↑ press start again</button>
+          <div style={{ display: 'flex', gap: 8 }}>
+            {[
+              { icon: Github, href: PROFILE.github, label: 'GitHub' },
+              { icon: Linkedin, href: PROFILE.linkedin, label: 'LinkedIn' },
+              { icon: Mail, href: `mailto:${PROFILE.email}`, label: 'Email' },
+            ].map(({ icon: Icon, href, label }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" title={label} className="icon-pixel"><Icon size={16} /></a>
+            ))}
+          </div>
+        </div>
       </div>
+      <div className="footer-ground" aria-hidden="true" />
     </footer>
   )
 }
