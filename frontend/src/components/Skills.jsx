@@ -1,135 +1,95 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
+import { useMemo, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import SectionHead from './SectionHead'
+import { SKILLS, usedIn, PROJECTS } from '../data'
+import { scrollToId } from '../smoothScroll'
 
-const languages = [
-  { name: "Python", level: 90, color: '#a78bfa' },
-  { name: "JavaScript", level: 88, color: '#38bdf8' },
-  { name: "Java", level: 85, color: '#34d399' },
-  { name: "TypeScript", level: 75, color: '#a78bfa' },
-  { name: "SQL / PL-SQL", level: 85, color: '#38bdf8' },
-  { name: "Dart", level: 72, color: '#34d399' },
-  { name: "PHP", level: 70, color: '#a78bfa' },
+const TABS = [
+  ['all', 'all'],
+  ['language', 'languages'],
+  ['framework', 'frameworks'],
+  ['tool', 'tools'],
 ]
-
-const frameworks = [
-  { name: "React", level: 88, color: '#38bdf8' },
-  { name: "Node.js", level: 85, color: '#34d399' },
-  { name: "Spring Boot", level: 80, color: '#a78bfa' },
-  { name: "Express.js", level: 83, color: '#38bdf8' },
-  { name: "Flutter", level: 75, color: '#34d399' },
-  { name: "IFS Aurena", level: 80, color: '#a78bfa' },
-]
-
-const tools = [
-  "Git", "Bitbucket", "Jira", "Figma", "VS Code",
-  "IntelliJ", "Postman", "Supabase", "PostgreSQL",
-  "Adobe Photoshop", "Docker", "Azure DevOps"
-]
-
-function SkillBar({ name, level, color, delay }) {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 })
-
-  return (
-    <div ref={ref} style={{ marginBottom: '20px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-        <span style={{ fontSize: '0.92rem', fontWeight: 500 }}>{name}</span>
-        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontFamily: "'JetBrains Mono', monospace" }}>
-          {level}%
-        </span>
-      </div>
-      <div style={{
-        height: '6px', borderRadius: '3px',
-        background: 'rgba(255,255,255,0.06)', overflow: 'hidden'
-      }}>
-        <motion.div
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${level}%` } : { width: 0 }}
-          transition={{ duration: 1.2, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
-          style={{
-            height: '100%', borderRadius: '3px',
-            background: `linear-gradient(90deg, ${color}99, ${color})`,
-            boxShadow: `0 0 12px ${color}40`
-          }}
-        />
-      </div>
-    </div>
-  )
-}
+const KIND = { language: 'language', framework: 'framework / platform', tool: 'tool / infra' }
+const COLS = 6
 
 export default function Skills() {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
+  const [tab, setTab] = useState('all')
+  const [sel, setSel] = useState(SKILLS[0])
+  const items = useMemo(() => SKILLS.filter(s => tab === 'all' || s.kind === tab), [tab])
+  const empties = (COLS - (items.length % COLS)) % COLS
+  const uses = usedIn(sel)
+  const projectTitles = new Set(PROJECTS.map(p => p.title))
+
+  const openProject = (title) => {
+    window.dispatchEvent(new CustomEvent('select-project', { detail: title }))
+    scrollToId('projects')
+  }
 
   return (
-    <section id="skills" className="section" ref={ref} style={{ background: 'rgba(13,13,26,0.5)' }}>
+    <section id="skills" className="section">
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
-          <p className="section-label">02. Skills</p>
-          <h2 className="section-title">
-            Technical <span className="gradient-text">Arsenal</span>
-          </h2>
-          <div className="divider" />
-        </motion.div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
-          <motion.div
-            className="card"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2, duration: 0.7 }}
-          >
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '1.3rem' }}>⌨️</span> Languages
-            </h3>
-            {languages.map((s, i) => (
-              <SkillBar key={s.name} {...s} delay={0.3 + i * 0.07} />
-            ))}
-          </motion.div>
-
-          <motion.div
-            className="card"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.35, duration: 0.7 }}
-          >
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '1.3rem' }}>🚀</span> Frameworks & Tech
-            </h3>
-            {frameworks.map((s, i) => (
-              <SkillBar key={s.name} {...s} delay={0.4 + i * 0.07} />
-            ))}
-          </motion.div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.6, duration: 0.7 }}
-          style={{ marginTop: '40px' }}
-          className="card"
-        >
-          <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ fontSize: '1.3rem' }}>🛠️</span> Tools & Platforms
-          </h3>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-            {tools.map((tool, i) => (
-              <motion.span
-                key={tool}
-                className="tag"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 0.7 + i * 0.04 }}
-                whileHover={{ scale: 1.08, borderColor: 'rgba(124,58,237,0.5)' }}
-                style={{ cursor: 'default', fontSize: '0.85rem', padding: '6px 14px' }}
-              >
-                {tool}
-              </motion.span>
-            ))}
+        <SectionHead eyebrow="04 — skills" title="Inventory" sub={`${SKILLS.length} items. Hover or tap one to inspect it.`} />
+        <div className="inv">
+          <div>
+            <div className="inv-tabs" role="tablist">
+              {TABS.map(([k, label]) => (
+                <button key={k} role="tab" aria-selected={tab === k} className={`inv-tab ${tab === k ? 'is-on' : ''}`} onClick={() => setTab(k)}>
+                  {label}
+                </button>
+              ))}
+            </div>
+            <motion.div className="inv-grid" layout>
+              <AnimatePresence initial={false}>
+                {items.map(s => (
+                  <motion.button
+                    layout
+                    key={s.name}
+                    initial={{ opacity: 0, scale: 0.6 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.6 }}
+                    transition={{ duration: 0.18 }}
+                    className={`slot ${sel.name === s.name ? 'is-sel' : ''}`}
+                    style={{ '--c': s.color }}
+                    onMouseEnter={() => setSel(s)}
+                    onFocus={() => setSel(s)}
+                    onClick={() => setSel(s)}
+                    aria-label={s.name}
+                  >
+                    <span className="slot-mono">{s.short}</span>
+                    <span className="slot-pip" />
+                  </motion.button>
+                ))}
+                {Array.from({ length: empties }, (_, i) => <motion.span layout key={`e${i}`} className="slot slot--empty" />)}
+              </AnimatePresence>
+            </motion.div>
           </div>
-        </motion.div>
+
+          <div className="inspect">
+            <p className="pixel-label" style={{ color: 'var(--text-3)' }}>item inspector</p>
+            <AnimatePresence mode="wait">
+              <motion.div key={sel.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}>
+                <div className="inspect-top">
+                  <span className="slot slot--big" style={{ '--c': sel.color }}><span className="slot-mono">{sel.short}</span></span>
+                  <div>
+                    <h3 className="inspect-name">{sel.name}</h3>
+                    <span className="pixel-label" style={{ color: sel.color }}>{KIND[sel.kind]}</span>
+                  </div>
+                </div>
+                <p className="pixel-label inspect-cap">equipped in</p>
+                {uses.length ? (
+                  <div className="inspect-uses">
+                    {uses.map(u => projectTitles.has(u)
+                      ? <button key={u} className="powerup powerup--link" style={{ '--c': sel.color }} onClick={() => openProject(u)}>{u} →</button>
+                      : <span key={u} className="powerup" style={{ '--c': sel.color }}>{u}</span>)}
+                  </div>
+                ) : (
+                  <p className="inspect-none">Part of the everyday toolkit across coursework, hackathons and side projects.</p>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
       </div>
     </section>
   )

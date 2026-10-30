@@ -1,121 +1,111 @@
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { Code2, Cpu, Globe, Users } from 'lucide-react'
+import SectionHead from './SectionHead'
+import { PROJECTS, ACHIEVEMENTS, CERTIFICATIONS, LEADERSHIP, INTERESTS, PROFILE } from '../data'
 
-const stats = [
-  { value: '3+', label: 'Projects Built', icon: Code2 },
-  { value: '80%+', label: 'Academic Average', icon: Globe },
-  { value: '5+', label: 'Hackathons', icon: Cpu },
-  { value: 'IFS', label: 'Industry Experience', icon: Users },
+const COMPETITIONS = ACHIEVEMENTS.filter(a => !/GCE|Foundation/.test(a.event))
+
+const STATS = [
+  { value: PROJECTS.length, suffix: '', label: 'projects shipped', back: PROJECTS.map(p => p.title) },
+  { value: COMPETITIONS.length, suffix: '', label: 'competitions', back: COMPETITIONS.map(a => `${a.title} · ${a.event}`) },
+  { value: CERTIFICATIONS.length, suffix: '', label: 'certifications', back: [...CERTIFICATIONS.slice(0, 4).map(c => c.name), `+${CERTIFICATIONS.length - 4} more`] },
+  { value: 80.67, suffix: '%', label: 'level 4 average', back: ['Level 4: 80.67%', 'Level 5: 74.8%', 'Foundation: Distinction', "GCE O/L: 9 A's"] },
 ]
 
-const interests = [
-  'Machine Learning', 'Software Engineering', 'System Design',
-  'Cybersecurity & Secure Systems', 'Explainable AI (XAI)', 'Agentic AI'
+const SHEET = [
+  ['name', PROFILE.name],
+  ['class', 'Software Engineer'],
+  ['guild', 'IFS R&D International'],
+  ['base', 'Colombo, Sri Lanka'],
+  ['level', 'Final-year CS @ IIT'],
+  ['status', 'open to opportunities'],
 ]
+
+function Count({ to, active, decimals }) {
+  const [v, setV] = useState(0)
+  const raf = useRef(0)
+  useEffect(() => {
+    if (!active) return
+    const start = performance.now()
+    const tick = (now) => {
+      const k = Math.min(1, (now - start) / 1200)
+      setV(to * (1 - Math.pow(1 - k, 3)))
+      if (k < 1) raf.current = requestAnimationFrame(tick)
+    }
+    raf.current = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf.current)
+  }, [active, to])
+  return v.toFixed(decimals)
+}
+
+function StatCard({ s, active }) {
+  const [flip, setFlip] = useState(false)
+  return (
+    <button className={`stat ${flip ? 'is-flipped' : ''}`} onClick={() => setFlip(f => !f)} aria-pressed={flip}>
+      <span className="stat-inner">
+        <span className="stat-face stat-front">
+          <span className="stat-value"><Count to={s.value} active={active} decimals={s.value % 1 ? 2 : 0} />{s.suffix}</span>
+          <span className="pixel-label stat-label">{s.label}</span>
+          <span className="pixel-label stat-hint">tap to flip ↻</span>
+        </span>
+        <span className="stat-face stat-back">
+          {s.back.map(line => <span key={line} className="stat-line">▸ {line}</span>)}
+        </span>
+      </span>
+    </button>
+  )
+}
 
 export default function About() {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 })
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 })
 
   return (
-    <section id="about" className="section" ref={ref}>
+    <section id="about" className="section">
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
-          <p className="section-label">01. About Me</p>
-          <h2 className="section-title">
-            Crafting <span className="gradient-text">Digital Experiences</span>
-          </h2>
-          <div className="divider" />
-        </motion.div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px', alignItems: 'start' }}>
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            <div style={{
-              width: '100%', maxWidth: '360px', aspectRatio: '1',
-              borderRadius: '20px', position: 'relative',
-              background: 'linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.1))',
-              border: '1px solid var(--border-hover)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              overflow: 'hidden'
-            }}>
-              <div style={{
-                position: 'absolute', inset: 0,
-                background: 'radial-gradient(circle at 30% 30%, rgba(124,58,237,0.2), transparent 60%)'
-              }} />
-              <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-                <div style={{ fontSize: '5rem', marginBottom: '12px' }}>👨‍💻</div>
-                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.85rem', color: 'var(--accent-cyan)' }}>
-                  anusigan.dev
-                </p>
-              </div>
-              <div style={{
-                position: 'absolute', bottom: '-30px', right: '-30px',
-                width: '120px', height: '120px', borderRadius: '50%',
-                background: 'rgba(6,182,212,0.08)', filter: 'blur(20px)'
-              }} />
+        <SectionHead eyebrow="03 — about" title="Character sheet" />
+        <div className="sheet" ref={ref}>
+          <div className="sheet-id">
+            <div className="sheet-avatar" aria-hidden="true">
+              <span>AS</span>
+              <i className="sheet-lvl pixel-label">final yr</i>
             </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 }}
-          >
-            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.85, marginBottom: '20px', fontSize: '1.05rem' }}>
-              I'm a final-year <strong style={{ color: 'var(--text-primary)' }}>Computer Science undergraduate</strong> at
-              Informatics Institute of Technology (University of Westminster) and a{' '}
-              <strong style={{ color: 'var(--text-primary)' }}>Trainee Software Engineer at IFS R&D</strong>, where I work on
-              enterprise software, agile feature development, and AI-driven tooling.
-            </p>
-            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.85, marginBottom: '28px', fontSize: '1.05rem' }}>
-              I love building systems that are fast, elegant, and impactful — from full-stack web apps to
-              NLP-driven AI tools. Currently exploring <span style={{ color: '#a78bfa' }}>agentic AI workflows</span> and
-              contributing to <span style={{ color: 'var(--accent-cyan)' }}>MCP tooling</span> in production.
-            </p>
-
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '12px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-              Areas of Interest
-            </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '36px' }}>
-              {interests.map(i => (
-                <span key={i} className="tag">{i}</span>
+            <dl className="sheet-rows">
+              {SHEET.map(([k, v]) => (
+                <div key={k} className="sheet-row">
+                  <dt className="pixel-label">{k}</dt>
+                  <dd>{k === 'status' ? <><span className="live-dot" style={{ display: 'inline-block', marginRight: 8 }} />{v}</> : v}</dd>
+                </div>
               ))}
+            </dl>
+            <div className="sheet-bio">
+              <p>
+                I&apos;m a final-year <strong>Computer Science undergraduate</strong> at IIT (University of Westminster) and a
+                {' '}<strong>trainee software engineer at IFS R&D</strong>, where I deliver features in agile sprints, fix
+                customer-reported defects, and build MCP tools for LUMOS to support AI-assisted engineering.
+              </p>
+              <p>
+                I&apos;m drawn to problems where reliability meets intelligence: systems that are fast, maintainable and
+                genuinely useful. Outside work you&apos;ll find me at hackathons, leading student teams, or shipping side projects.
+              </p>
+            </div>
+          </div>
+
+          <div className="sheet-side">
+            <p className="pixel-label sheet-cap">stats</p>
+            <div className="stats">
+              {STATS.map(s => <StatCard key={s.label} s={s} active={inView} />)}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-              {stats.map(({ value, label, icon: Icon }, i) => (
-                <motion.div
-                  key={label}
-                  className="card"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.5 + i * 0.1 }}
-                  style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', gap: '12px' }}
-                >
-                  <div style={{
-                    width: 36, height: 36, borderRadius: '8px',
-                    background: 'rgba(124,58,237,0.15)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    flexShrink: 0
-                  }}>
-                    <Icon size={16} color="#a78bfa" />
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '1.2rem', fontWeight: 800, lineHeight: 1 }}>{value}</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '2px' }}>{label}</div>
-                  </div>
-                </motion.div>
-              ))}
+            <p className="pixel-label sheet-cap">perks · areas of interest</p>
+            <div className="perks">
+              {INTERESTS.map(i => <span key={i} className="perk">✦ {i}</span>)}
             </div>
-          </motion.div>
+
+            <p className="pixel-label sheet-cap">party · {LEADERSHIP.length} guild roles</p>
+            <p className="sheet-note">
+              {LEADERSHIP.slice(0, 3).map(l => `${l.role} (${l.org})`).join(' · ')} and more in the quest log.
+            </p>
+          </div>
         </div>
       </div>
     </section>
